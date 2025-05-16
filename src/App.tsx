@@ -3,10 +3,10 @@ import Header from './components/Header';
 import NotificationForm from './components/NotificationForm';
 import NotificationPreview from './components/NotificationPreview';
 import { DeploymentNotification, NotificationType } from './types/deployment';
-import { initialNotification } from './utils/initialData';
+import { emptyNotification } from './utils/initialData';
 
 function App() {
-  const [notification, setNotification] = useState<DeploymentNotification>(initialNotification);
+  const [notification, setNotification] = useState<DeploymentNotification>(emptyNotification);
   const [notificationType, setNotificationType] = useState<NotificationType>('pre-release');
 
   const handleNotificationChange = (updatedNotification: DeploymentNotification) => {
@@ -44,4 +44,4 @@ function App() {
   );
 }
 
-export default App;
+export default App
