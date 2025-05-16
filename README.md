@@ -30,7 +30,7 @@
 ### Installation
 
 ```bash
-git clone https://github.com/your-username/deployment-notifier.git
+git clone https://github.com/guibranco/deployment-notifier.git
 cd deployment-notifier
 npm install
 ````
@@ -77,5 +77,8 @@ deployment-notifier/
 
 MIT License © Guilherme Branco Stracini
 
-```
+---
 
+## 🙌 Contributions
+
+Feel free to open issues or submit pull requests! Suggestions and improvements are always welcome.
