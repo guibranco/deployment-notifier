@@ -12,6 +12,19 @@ interface NotificationFormProps {
   onTypeChange: (type: NotificationType) => void;
 }
 
+/**
+ * NotificationForm Component
+ *
+ * This component renders a form for creating and editing notifications.
+ * It includes fields for various types of notifications, such as email, projects,
+ * tasks, and other relevant information.
+ *
+ * @component
+ * @param {Object} props - The component properties.
+ * @param {Function} props.onSubmit - Callback function to handle form submission.
+ * @param {Object} props.notification - The initial notification data to populate the form.
+ * @returns {JSX.Element} The rendered NotificationForm component.
+ */
 const NotificationForm: React.FC<NotificationFormProps> = ({
   notification,
   onChange,
@@ -25,6 +38,9 @@ const NotificationForm: React.FC<NotificationFormProps> = ({
   const [dateError, setDateError] = useState(false);
   const [timeError, setTimeError] = useState(false);
 
+  /**
+   * Resets notification state and flags.
+   */
   const handleReset = () => {
     onChange({
       ...emptyNotification,
@@ -34,6 +50,14 @@ const NotificationForm: React.FC<NotificationFormProps> = ({
     setCustomRollback(false);
   };
 
+  /**
+   * Handles loading an example based on the notification type and updates state accordingly.
+   *
+   * This function determines the appropriate example data based on the `notificationType`.
+   * It then generates a unique ID using `uuidv4()` and merges it with the example data.
+   * The function also updates two state variables: `hasDowntime` to indicate if there is expected downtime,
+   * and `customRollback` to determine if a custom rollback plan is in place.
+   */
   const handleLoadExample = () => {
     let exampleData: DeploymentNotification;
     switch (notificationType) {
@@ -55,6 +79,9 @@ const NotificationForm: React.FC<NotificationFormProps> = ({
     setCustomRollback(exampleData.rollbackPlan !== 'Rollback to the previous (current) version.');
   };
 
+  /**
+   * Handles date input change and updates state and parent component.
+   */
   const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setDateError(notificationType === 'email' && !value);

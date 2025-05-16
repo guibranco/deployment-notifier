@@ -5,6 +5,9 @@ import NotificationPreview from './components/NotificationPreview';
 import { DeploymentNotification, NotificationType } from './types/deployment';
 import { emptyNotification } from './utils/initialData';
 
+/**
+ * Main application component that manages notification state and renders UI components.
+ */
 function App() {
   const [notification, setNotification] = useState<DeploymentNotification>(emptyNotification);
   const [notificationType, setNotificationType] = useState<NotificationType>('pre-release');
