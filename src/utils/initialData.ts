@@ -11,16 +11,34 @@ const currentTime = new Date().toLocaleTimeString('en-US', {
   minute: '2-digit'
 });
 
-export const initialNotification: DeploymentNotification = {
+export const emptyNotification: DeploymentNotification = {
   id: uuidv4(),
   date: currentDate,
-  deploymentTime: currentTime,
+  deploymentTime: '',
+  projects: [],
+  expectedDowntime: 'No downtime expected',
+  rollbackPlan: 'Rollback to the previous (current) version.',
+  emailFeatures: [],
+  emailSystems: [],
+  includeSupport: false,
+  supportContact: {
+    email: '',
+    phone: ''
+  }
+};
+
+export const preReleaseExample: DeploymentNotification = {
+  id: uuidv4(),
+  date: currentDate,
+  deploymentTime: 'as soon as possible',
   projects: [
     {
       id: uuidv4(),
       name: 'Policy Admin',
       version: '3.0.738',
       versionLink: 'https://github.com/org/policy-admin/releases/tag/3.0.738',
+      versionSystem: 'github',
+      taskSystem: 'jira',
       tasks: [
         {
           id: uuidv4(),
@@ -28,27 +46,81 @@ export const initialNotification: DeploymentNotification = {
           description: 'Add archived risks handling to Lapse Risk handler',
         },
       ],
-    },
-    {
-      id: uuidv4(),
-      name: 'Rerates',
-      version: '0.1.212',
-      tasks: [
-        {
-          id: uuidv4(),
-          ticketNumber: 'CORE-5678',
-          description: 'Do not throw collection not attempted exception on lapse risk handling if payments were simply unsuccessful',
-        },
-      ],
-    },
+    }
   ],
   expectedDowntime: 'No downtime expected',
   rollbackPlan: 'Rollback to the previous (current) version.',
   emailFeatures: [],
   emailSystems: [],
-  includeSupport: true,
+  includeSupport: false,
   supportContact: {
     email: '',
     phone: ''
+  }
+};
+
+export const postReleaseExample: DeploymentNotification = {
+  id: uuidv4(),
+  date: currentDate,
+  deploymentTime: 'close of business',
+  actualDeploymentTime: currentTime,
+  projects: [
+    {
+      id: uuidv4(),
+      name: 'Rerates',
+      version: '0.1.212',
+      versionSystem: 'azure',
+      taskSystem: 'azure',
+      tasks: [
+        {
+          id: uuidv4(),
+          ticketNumber: '#5678',
+          description: 'Do not throw collection not attempted exception on lapse risk handling if payments were simply unsuccessful',
+        },
+      ],
+    }
+  ],
+  expectedDowntime: { hours: 1, minutes: 30 },
+  rollbackPlan: 'If issues are encountered, we will restore from the backup taken before deployment.',
+  emailFeatures: [],
+  emailSystems: [],
+  includeSupport: false,
+  supportContact: {
+    email: '',
+    phone: ''
+  }
+};
+
+export const emailExample: DeploymentNotification = {
+  id: uuidv4(),
+  date: currentDate,
+  deploymentTime: currentTime,
+  projects: [],
+  expectedDowntime: { hours: 0, minutes: 45 },
+  rollbackPlan: '',
+  emailFeatures: [
+    {
+      id: uuidv4(),
+      description: 'Enhanced user authentication system'
+    },
+    {
+      id: uuidv4(),
+      description: 'Improved performance for large data sets'
+    }
+  ],
+  emailSystems: [
+    {
+      id: uuidv4(),
+      name: 'User Management System'
+    },
+    {
+      id: uuidv4(),
+      name: 'Data Processing Service'
+    }
+  ],
+  includeSupport: true,
+  supportContact: {
+    email: 'support@company.com',
+    phone: '+1 (555) 123-4567'
   }
 };

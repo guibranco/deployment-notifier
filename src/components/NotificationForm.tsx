@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { DeploymentNotification, DeploymentProject, NotificationType, Duration, EmailFeature, EmailSystem } from '../types/deployment';
 import ProjectForm from './ProjectForm';
 import { v4 as uuidv4 } from 'uuid';
-import { Plus, Clock, Trash2 } from 'lucide-react';
+import { Plus, Clock, Trash2, RefreshCw, FileInput } from 'lucide-react';
+import { emptyNotification, preReleaseExample, postReleaseExample, emailExample } from '../utils/initialData';
 
 interface NotificationFormProps {
   notification: DeploymentNotification;
@@ -23,6 +24,36 @@ const NotificationForm: React.FC<NotificationFormProps> = ({
   const [newSystem, setNewSystem] = useState('');
   const [dateError, setDateError] = useState(false);
   const [timeError, setTimeError] = useState(false);
+
+  const handleReset = () => {
+    onChange({
+      ...emptyNotification,
+      id: uuidv4(),
+    });
+    setHasDowntime(false);
+    setCustomRollback(false);
+  };
+
+  const handleLoadExample = () => {
+    let exampleData: DeploymentNotification;
+    switch (notificationType) {
+      case 'pre-release':
+        exampleData = preReleaseExample;
+        break;
+      case 'post-release':
+        exampleData = postReleaseExample;
+        break;
+      case 'email':
+        exampleData = emailExample;
+        break;
+    }
+    onChange({
+      ...exampleData,
+      id: uuidv4(),
+    });
+    setHasDowntime(typeof exampleData.expectedDowntime !== 'string');
+    setCustomRollback(exampleData.rollbackPlan !== 'Rollback to the previous (current) version.');
+  };
 
   const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -174,7 +205,25 @@ const NotificationForm: React.FC<NotificationFormProps> = ({
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden">
       <div className="bg-gray-50 px-5 py-4 border-b">
-        <h2 className="font-semibold text-gray-800 text-lg">Deployment Details</h2>
+        <div className="flex justify-between items-center">
+          <h2 className="font-semibold text-gray-800 text-lg">Deployment Details</h2>
+          <div className="flex gap-2">
+            <button
+              onClick={handleLoadExample}
+              className="flex items-center px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#79378b]"
+            >
+              <FileInput size={16} className="mr-1" />
+              Load Example
+            </button>
+            <button
+              onClick={handleReset}
+              className="flex items-center px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#79378b]"
+            >
+              <RefreshCw size={16} className="mr-1" />
+              Reset
+            </button>
+          </div>
+        </div>
       </div>
       <div className="p-5">
         <div className="mb-6">
