@@ -1,6 +1,7 @@
 import React from 'react';
 import { DeploymentProject, DeploymentTask } from '../types/deployment';
-import { Trash2, Plus, Github, GitBranch, Trello, CircleDot } from 'lucide-react';
+import { Trash2, Plus, GitBranch, Kanban, CircleDot } from 'lucide-react';
+import { GitHubIcon } from './icons/GitHubIcon';
 import { v4 as uuidv4 } from 'uuid';
 
 interface ProjectFormProps {
@@ -93,7 +94,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ project, onChange, onRemove, 
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                   }`}
                 >
-                  <Github size={16} className="mr-1" />
+                  <GitHubIcon width={16} height={16} className="mr-1" />
                   GitHub
                 </button>
                 <button
@@ -210,7 +211,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ project, onChange, onRemove, 
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
-              <Trello size={16} className="mr-1" />
+              <Kanban size={16} className="mr-1" />
               Trello
             </button>
             <button
@@ -221,7 +222,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ project, onChange, onRemove, 
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
-              <Github size={16} className="mr-1" />
+              <GitHubIcon width={16} height={16} className="mr-1" />
               GitHub
             </button>
             <button
