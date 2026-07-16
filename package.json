@@ -31,7 +31,7 @@
     "eslint-plugin-react-refresh": "^0.5.3",
     "postcss": "^8.5.19",
     "tailwindcss": "^4.2.4",
-    "typescript": "^6.0.3",
+    "typescript": "^7.0.2",
     "vite": "^8.1.5"
   }
 }
