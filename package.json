@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "lucide-react": "^1.34.0",
-    "marked": "^18.0.10",
+    "marked": "^18.0.11",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "uuid": "^14.0.2"
